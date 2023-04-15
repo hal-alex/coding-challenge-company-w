@@ -6,8 +6,11 @@ def is_profile_complete(user):
     site = user.profile.site
     form = models.ProfileForm.objects.get(site=site)
     form_fields = form.form_fields['fields']
+    print(form_fields)
     required_fields = [field['id'] for field in form_fields if field['required']]
+    print(required_fields)
     is_complete = all([field in user.profile.dynamic_fields for field in required_fields])
+    print(is_complete)
     return is_complete
 
 class ProfileRedirectionMiddleware:
